@@ -257,7 +257,167 @@ db F3 0F 10 4B 14
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
+    <CheatEntry>
+      <ID>49</ID>
+      <Description>"升级不消耗精华 / Upgrade with no cost"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"Nioh3.exe"+27690D8) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+
+originalcode:
+test rax,rax
+jz Nioh3.exe+27690FB
+
+exit:
+jmp returnhere
+
+"Nioh3.exe"+27690D8:
+jmp newmem
+nop
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"Nioh3.exe"+27690D8:
+db 48 3B 41 10 7F 1D
+//cmp rax,[rcx+10]
+//jg Nioh3.exe+27690FB
+</AssemblerScript>
+    </CheatEntry>
   </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of mov [rax+10],rdx</Description>
+      <AddressString>Nioh3.exe+B0BDFF</AddressString>
+      <Before>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>11</Byte>
+        <Byte>48</Byte>
+        <Byte>B9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rdx,[rax+10]</Description>
+      <AddressString>Nioh3.exe+275F4CC</AddressString>
+      <Before>
+        <Byte>C6</Byte>
+        <Byte>01</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>2B</Byte>
+        <Byte>D0</Byte>
+        <Byte>E8</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp [rdx+10],rax</Description>
+      <AddressString>Nioh3.exe+273936E</AddressString>
+      <Before>
+        <Byte>C8</Byte>
+        <Byte>01</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>11</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>39</Byte>
+        <Byte>42</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>9D</Byte>
+        <Byte>C0</Byte>
+        <Byte>EB</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp r10,[rax+10]</Description>
+      <AddressString>Nioh3.exe+173FB00</AddressString>
+      <Before>
+        <Byte>03</Byte>
+        <Byte>D0</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>06</Byte>
+      </Before>
+      <Actual>
+        <Byte>4C</Byte>
+        <Byte>3B</Byte>
+        <Byte>50</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>7F</Byte>
+        <Byte>33</Byte>
+        <Byte>4D</Byte>
+        <Byte>3B</Byte>
+        <Byte>D4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp rax,[rcx+10]</Description>
+      <AddressString>Nioh3.exe+27690D8</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>0E</Byte>
+        <Byte>49</Byte>
+        <Byte>03</Byte>
+        <Byte>C3</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>3B</Byte>
+        <Byte>41</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>7F</Byte>
+        <Byte>1D</Byte>
+        <Byte>48</Byte>
+        <Byte>B9</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
   <UserdefinedSymbols/>
   <Structures StructVersion="2">
     <Structure Name="unnamed structure" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
